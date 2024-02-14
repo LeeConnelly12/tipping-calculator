@@ -7,14 +7,16 @@ import People from "@/components/People.vue"
 const tips = ["5%", "10%", "15%", "25%", "50%"]
 
 const form = ref({
+  bill: 142.55,
   tip: "15%",
+  people: 5,
 })
 </script>
 
 <template>
   <form class="bg-white rounded-t-3xl p-8 text-turquoise">
     <label class="block" for="bill">Bill</label>
-    <Input class="mt-2" type="text" id="bill">
+    <Input v-model="form.bill" class="mt-2" type="text" id="bill">
       <template #icon>
         <DollarSign />
       </template>
@@ -37,8 +39,8 @@ const form = ref({
         />
       </label>
     </div>
-    <label class="block mt-8" for="number_of_people">Number of People</label>
-    <Input class="mt-2" type="text" id="number_of_people">
+    <label class="block mt-8" for="people">Number of People</label>
+    <Input v-model="form.people" class="mt-2" type="text" id="people">
       <template #icon>
         <People />
       </template>
