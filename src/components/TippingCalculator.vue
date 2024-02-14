@@ -51,69 +51,77 @@ const total = computed(() => {
 </script>
 
 <template>
-  <form class="bg-white rounded-t-3xl p-8 text-turquoise">
-    <label class="block" for="bill">Bill</label>
-    <Input
-      v-model="form.bill"
-      placeholder="0"
-      class="mt-2"
-      min="0"
-      type="number"
-      step="any"
-      id="bill"
-    >
-      <template #icon>
-        <DollarSign />
-      </template>
-    </Input>
-    <p class="mt-8">Select Tip %</p>
-    <div class="grid grid-cols-2 gap-4 mt-4">
-      <label
-        v-for="(tip, index) in tips"
-        :key="index"
-        class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer"
-        :class="tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'"
-      >
-        <p>{{ tip }}%</p>
-        <input
-          v-model="form.tip"
-          class="hidden"
-          type="radio"
-          name="tip"
-          :value="tip"
-        />
-      </label>
-      <button
-        v-if="!showCustomTip"
-        class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
-        type="button"
-        @click="showCustomTip = true"
-      >
-        Custom
-      </button>
-      <input
-        v-if="showCustomTip"
-        v-model="form.tip"
-        class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+  <div
+    class="bg-white rounded-t-3xl lg:rounded-3xl p-8 text-turquoise lg:grid grid-cols-2 gap-x-6 mt-10 xl:mt-20 lg:shadow-md"
+  >
+    <div>
+      <label class="block" for="bill">Bill</label>
+      <Input
+        v-model="form.bill"
+        placeholder="0"
+        class="mt-2"
         min="0"
         type="number"
         step="any"
-      />
+        id="bill"
+      >
+        <template #icon>
+          <DollarSign />
+        </template>
+      </Input>
+      <p class="mt-8">Select Tip %</p>
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <label
+          v-for="(tip, index) in tips"
+          :key="index"
+          class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer"
+          :class="
+            tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'
+          "
+        >
+          <p>{{ tip }}%</p>
+          <input
+            v-model="form.tip"
+            class="hidden"
+            type="radio"
+            name="tip"
+            :value="tip"
+          />
+        </label>
+        <button
+          v-if="!showCustomTip"
+          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+          type="button"
+          @click="showCustomTip = true"
+        >
+          Custom
+        </button>
+        <input
+          v-if="showCustomTip"
+          v-model="form.tip"
+          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+          min="0"
+          type="number"
+          step="any"
+        />
+      </div>
+      <label class="block mt-8" for="people">Number of People</label>
+      <Input
+        v-model="form.people"
+        placeholder="0"
+        class="mt-2"
+        min="0"
+        type="number"
+        id="people"
+      >
+        <template #icon>
+          <People />
+        </template>
+      </Input>
     </div>
-    <label class="block mt-8" for="people">Number of People</label>
-    <Input
-      v-model="form.people"
-      placeholder="0"
-      class="mt-2"
-      min="0"
-      type="number"
-      id="people"
+    <div
+      class="mt-8 bg-green rounded-2xl pt-9 px-6 pb-6 grid grid-rows-[auto_auto_1fr_auto]"
     >
-      <template #icon>
-        <People />
-      </template>
-    </Input>
-    <div class="mt-8 bg-green rounded-2xl pt-9 px-6 pb-6">
       <div class="flex justify-between items-center">
         <div>
           <p class="text-white">Tip Amount</p>
@@ -133,7 +141,7 @@ const total = computed(() => {
         </p>
       </div>
       <button
-        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl disabled:opacity-20 disabled:cursor-not-allowed"
+        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl disabled:opacity-20 disabled:cursor-not-allowed row-start-4"
         type="button"
         :disabled="formChanged"
         @click="reset"
@@ -141,5 +149,5 @@ const total = computed(() => {
         Reset
       </button>
     </div>
-  </form>
+  </div>
 </template>
