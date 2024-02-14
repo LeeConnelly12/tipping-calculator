@@ -71,23 +71,18 @@ const total = computed(() => {
       </Input>
       <p class="mt-8">Select Tip %</p>
       <div class="grid grid-cols-2 lg:grid-cols-[7rem_7rem_7rem] gap-4 mt-4">
-        <label
+        <button
           v-for="(tip, index) in tips"
           :key="index"
-          class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer"
+          class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer select-none"
           :class="
             tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'
           "
+          type="button"
+          @click="form.tip = tip"
         >
-          <p>{{ tip }}%</p>
-          <input
-            v-model="form.tip"
-            class="hidden"
-            type="radio"
-            name="tip"
-            :value="tip"
-          />
-        </label>
+          {{ tip }}%
+        </button>
         <button
           v-if="!showCustomTip"
           class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
