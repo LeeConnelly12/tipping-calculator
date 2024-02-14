@@ -24,40 +24,29 @@ const formChanged = computed(() => {
   return JSON.stringify(form.value) === JSON.stringify(defaults)
 })
 
-const tipAmount = computed(() => {
-  if (!form.value.bill) {
+const tip = computed(() => {
+  const { bill, tip, people } = form.value
+
+  if (!bill || !tip || !people) {
     return null
   }
 
-  if (!form.value.tip) {
-    return null
-  }
+  const amount = bill * (tip / 100)
 
-  if (!form.value.people) {
-    return null
-  }
-
-  const amount = form.value.bill * (form.value.tip / 100)
-
-  return Math.floor((amount / form.value.people) * 100) / 100
+  return Math.floor((amount / people) * 100) / 100
 })
 
 const total = computed(() => {
-  if (!form.value.bill) {
+  const { bill, tip, people } = form.value
+
+  if (!bill || !tip || !people) {
     return null
   }
 
-  if (!form.value.tip) {
-    return null
-  }
+  const tipAmount = (bill * (tip / 100)) / people
+  const perPersonAmount = Math.floor((bill / people) * 100) / 100
 
-  if (!form.value.people) {
-    return null
-  }
-
-  const tip = (form.value.bill * (form.value.tip / 100)) / form.value.people
-
-  return Math.floor((form.value.bill / form.value.people) * 100) / 100 + tip
+  return perPersonAmount + tipAmount
 })
 </script>
 
@@ -131,7 +120,7 @@ const total = computed(() => {
           <p class="text-gray text-sm">/ person</p>
         </div>
         <p class="text-3xl text-teal">
-          ${{ Number(tipAmount).toFixed(2) ?? "0.00" }}
+          ${{ Number(tip).toFixed(2) ?? "0.00" }}
         </p>
       </div>
       <div class="flex justify-between items-center mt-5">
