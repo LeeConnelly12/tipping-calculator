@@ -9,9 +9,9 @@ const tips = [5, 10, 15, 25, 50]
 const showCustomTip = ref(false)
 
 const defaults = {
-  bill: 0,
+  bill: null,
   tip: null,
-  people: 0,
+  people: null,
 }
 
 const form = ref({ ...defaults })
@@ -28,7 +28,13 @@ const formChanged = computed(() => {
 <template>
   <form class="bg-white rounded-t-3xl p-8 text-turquoise">
     <label class="block" for="bill">Bill</label>
-    <Input v-model="form.bill" class="mt-2" type="text" id="bill">
+    <Input
+      v-model="form.bill"
+      placeholder="0"
+      class="mt-2"
+      type="text"
+      id="bill"
+    >
       <template #icon>
         <DollarSign />
       </template>
@@ -66,7 +72,13 @@ const formChanged = computed(() => {
       />
     </div>
     <label class="block mt-8" for="people">Number of People</label>
-    <Input v-model="form.people" class="mt-2" type="text" id="people">
+    <Input
+      v-model="form.people"
+      placeholder="0"
+      class="mt-2"
+      type="text"
+      id="people"
+    >
       <template #icon>
         <People />
       </template>
