@@ -23,6 +23,42 @@ function reset() {
 const formChanged = computed(() => {
   return JSON.stringify(form.value) === JSON.stringify(defaults)
 })
+
+const tipAmount = computed(() => {
+  if (!form.value.bill) {
+    return null
+  }
+
+  if (!form.value.tip) {
+    return null
+  }
+
+  if (!form.value.people) {
+    return null
+  }
+
+  const amount = form.value.bill * (form.value.tip / 100)
+
+  return Math.floor((amount / form.value.people) * 100) / 100
+})
+
+const total = computed(() => {
+  if (!form.value.bill) {
+    return null
+  }
+
+  if (!form.value.tip) {
+    return null
+  }
+
+  if (!form.value.people) {
+    return null
+  }
+
+  const tip = (form.value.bill * (form.value.tip / 100)) / form.value.people
+
+  return Math.floor((form.value.bill / form.value.people) * 100) / 100 + tip
+})
 </script>
 
 <template>
@@ -32,7 +68,9 @@ const formChanged = computed(() => {
       v-model="form.bill"
       placeholder="0"
       class="mt-2"
-      type="text"
+      min="0"
+      type="number"
+      step="any"
       id="bill"
     >
       <template #icon>
@@ -68,7 +106,9 @@ const formChanged = computed(() => {
         v-if="showCustomTip"
         v-model="form.tip"
         class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
-        type="text"
+        min="0"
+        type="number"
+        step="any"
       />
     </div>
     <label class="block mt-8" for="people">Number of People</label>
@@ -76,7 +116,8 @@ const formChanged = computed(() => {
       v-model="form.people"
       placeholder="0"
       class="mt-2"
-      type="text"
+      min="0"
+      type="number"
       id="people"
     >
       <template #icon>
@@ -89,14 +130,18 @@ const formChanged = computed(() => {
           <p class="text-white">Tip Amount</p>
           <p class="text-gray text-sm">/ person</p>
         </div>
-        <p class="text-3xl text-teal">$4.27</p>
+        <p class="text-3xl text-teal">
+          ${{ Number(tipAmount).toFixed(2) ?? "0.00" }}
+        </p>
       </div>
       <div class="flex justify-between items-center mt-5">
         <div>
           <p class="text-white">Total</p>
           <p class="text-gray text-sm">/ person</p>
         </div>
-        <p class="text-3xl text-teal">$32.79</p>
+        <p class="text-3xl text-teal">
+          ${{ Number(total).toFixed(2) ?? "0.00" }}
+        </p>
       </div>
       <button
         class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl disabled:opacity-20 disabled:cursor-not-allowed"
