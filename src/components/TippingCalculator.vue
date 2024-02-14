@@ -1,13 +1,17 @@
-<script setup></script>
+<script setup>
+import Input from "@/components/Input.vue"
+import DollarSign from "@/components/DollarSign.vue"
+import People from "@/components/People.vue"
+</script>
 
 <template>
   <div class="bg-white rounded-t-3xl p-8 text-turquoise">
     <label class="block" for="bill">Bill</label>
-    <input
-      class="bg-light-blue rounded-md px-5 py-2 h-12 mt-2 text-green text-2xl w-full"
-      type="text"
-      id="bill"
-    />
+    <Input class="mt-2" type="text" id="bill">
+      <template #icon>
+        <DollarSign />
+      </template>
+    </Input>
     <p class="mt-8">Select Tip %</p>
     <div class="grid grid-cols-2 gap-4 mt-4">
       <label
@@ -24,11 +28,11 @@
       </label>
     </div>
     <label class="block mt-8" for="number_of_people">Number of People</label>
-    <input
-      class="bg-light-blue rounded-md px-5 py-2 h-12 mt-2 text-green text-2xl w-full"
-      type="text"
-      id="bill"
-    />
+    <Input class="mt-2" type="text" id="number_of_people">
+      <template #icon>
+        <People />
+      </template>
+    </Input>
     <div class="mt-8 bg-green rounded-2xl pt-9 px-6 pb-6">
       <div class="flex justify-between items-center">
         <div>
