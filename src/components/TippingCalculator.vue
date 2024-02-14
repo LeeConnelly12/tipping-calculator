@@ -70,7 +70,7 @@ const total = computed(() => {
         </template>
       </Input>
       <p class="mt-8">Select Tip %</p>
-      <div class="grid grid-cols-2 gap-4 mt-4">
+      <div class="grid grid-cols-2 lg:grid-cols-[7rem_7rem_7rem] gap-4 mt-4">
         <label
           v-for="(tip, index) in tips"
           :key="index"
