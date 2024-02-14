@@ -49,7 +49,7 @@ import People from "@/components/People.vue"
         <p class="text-2xl text-teal">$32.79</p>
       </div>
       <button
-        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8"
+        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl"
         type="button"
       >
         Reset
