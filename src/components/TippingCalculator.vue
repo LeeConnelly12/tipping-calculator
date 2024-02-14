@@ -1,11 +1,18 @@
 <script setup>
+import { ref } from "vue"
 import Input from "@/components/Input.vue"
 import DollarSign from "@/components/DollarSign.vue"
 import People from "@/components/People.vue"
+
+const tips = ["5%", "10%", "15%", "25%", "50%"]
+
+const form = ref({
+  tip: "15%",
+})
 </script>
 
 <template>
-  <div class="bg-white rounded-t-3xl p-8 text-turquoise">
+  <form class="bg-white rounded-t-3xl p-8 text-turquoise">
     <label class="block" for="bill">Bill</label>
     <Input class="mt-2" type="text" id="bill">
       <template #icon>
@@ -15,16 +22,19 @@ import People from "@/components/People.vue"
     <p class="mt-8">Select Tip %</p>
     <div class="grid grid-cols-2 gap-4 mt-4">
       <label
-        class="bg-green h-12 rounded-md text-white text-center text-2xl py-2 cursor-pointer"
+        v-for="(tip, index) in tips"
+        :key="index"
+        class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer"
+        :class="tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'"
       >
-        <p>5%</p>
-        <input class="hidden" type="radio" name="tip" value="5%" />
-      </label>
-      <label
-        class="bg-green h-12 rounded-md text-white text-center text-2xl py-2 cursor-pointer"
-      >
-        <p>10%</p>
-        <input class="hidden" type="radio" name="tip" value="10%" />
+        <p>{{ tip }}</p>
+        <input
+          v-model="form.tip"
+          class="hidden"
+          type="radio"
+          name="tip"
+          :value="tip"
+        />
       </label>
     </div>
     <label class="block mt-8" for="number_of_people">Number of People</label>
@@ -55,5 +65,5 @@ import People from "@/components/People.vue"
         Reset
       </button>
     </div>
-  </div>
+  </form>
 </template>
