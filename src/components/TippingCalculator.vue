@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue"
+import { computed, ref } from "vue"
 import Input from "@/components/Input.vue"
 import DollarSign from "@/components/DollarSign.vue"
 import People from "@/components/People.vue"
@@ -8,10 +8,20 @@ const tips = [5, 10, 15, 25, 50]
 
 const showCustomTip = ref(false)
 
-const form = ref({
-  bill: 142.55,
-  tip: 15,
-  people: 5,
+const defaults = {
+  bill: 0,
+  tip: null,
+  people: 0,
+}
+
+const form = ref({ ...defaults })
+
+function reset() {
+  form.value = { ...defaults }
+}
+
+const formChanged = computed(() => {
+  return JSON.stringify(form.value) === JSON.stringify(defaults)
 })
 </script>
 
@@ -77,8 +87,10 @@ const form = ref({
         <p class="text-3xl text-teal">$32.79</p>
       </div>
       <button
-        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl"
+        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl disabled:opacity-20 disabled:cursor-not-allowed"
         type="button"
+        :disabled="formChanged"
+        @click="reset"
       >
         Reset
       </button>
