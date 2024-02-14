@@ -4,11 +4,13 @@ import Input from "@/components/Input.vue"
 import DollarSign from "@/components/DollarSign.vue"
 import People from "@/components/People.vue"
 
-const tips = ["5%", "10%", "15%", "25%", "50%"]
+const tips = [5, 10, 15, 25, 50]
+
+const showCustomTip = ref(false)
 
 const form = ref({
   bill: 142.55,
-  tip: "15%",
+  tip: 15,
   people: 5,
 })
 </script>
@@ -29,7 +31,7 @@ const form = ref({
         class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer"
         :class="tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'"
       >
-        <p>{{ tip }}</p>
+        <p>{{ tip }}%</p>
         <input
           v-model="form.tip"
           class="hidden"
@@ -38,6 +40,20 @@ const form = ref({
           :value="tip"
         />
       </label>
+      <button
+        v-if="!showCustomTip"
+        class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+        type="button"
+        @click="showCustomTip = true"
+      >
+        Custom
+      </button>
+      <input
+        v-if="showCustomTip"
+        v-model="form.tip"
+        class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+        type="text"
+      />
     </div>
     <label class="block mt-8" for="people">Number of People</label>
     <Input v-model="form.people" class="mt-2" type="text" id="people">
