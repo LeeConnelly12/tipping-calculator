@@ -39,14 +39,14 @@ import People from "@/components/People.vue"
           <p class="text-white">Tip Amount</p>
           <p class="text-gray text-sm">/ person</p>
         </div>
-        <p class="text-2xl text-teal">$4.27</p>
+        <p class="text-3xl text-teal">$4.27</p>
       </div>
       <div class="flex justify-between items-center mt-5">
         <div>
           <p class="text-white">Total</p>
           <p class="text-gray text-sm">/ person</p>
         </div>
-        <p class="text-2xl text-teal">$32.79</p>
+        <p class="text-3xl text-teal">$32.79</p>
       </div>
       <button
         class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl"
