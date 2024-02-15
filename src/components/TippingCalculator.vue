@@ -52,18 +52,16 @@ const total = computed(() => {
 
 <template>
   <div
-    class="bg-white rounded-t-3xl lg:rounded-3xl p-8 text-turquoise lg:grid grid-cols-2 gap-x-6 mt-10 xl:mt-20 lg:shadow-md"
+    class="bg-white rounded-t-3xl lg:rounded-3xl p-8 text-turquoise lg:grid grid-cols-2 gap-x-6 items-center mt-10 xl:mt-20 lg:shadow-md"
   >
     <div>
-      <label class="block" for="bill">Bill</label>
       <Input
         v-model="form.bill"
         placeholder="0"
-        class="mt-2"
         min="0"
         type="number"
         step="any"
-        id="bill"
+        label="Bill"
       >
         <template #icon>
           <DollarSign />
@@ -74,7 +72,7 @@ const total = computed(() => {
         <button
           v-for="(tip, index) in tips"
           :key="index"
-          class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer select-none"
+          class="h-12 rounded-md text-center text-2xl py-2 cursor-pointer select-none hover:bg-light-green hover:text-green focus:outline-none focus:outline-teal focus:outline-offset-0"
           :class="
             tip === form.tip ? 'bg-teal text-green' : 'bg-green text-white'
           "
@@ -85,7 +83,7 @@ const total = computed(() => {
         </button>
         <button
           v-if="!showCustomTip"
-          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2 focus:outline-none focus:outline-teal focus:outline-offset-0"
           type="button"
           @click="showCustomTip = true"
         >
@@ -94,20 +92,20 @@ const total = computed(() => {
         <input
           v-if="showCustomTip"
           v-model="form.tip"
-          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2"
+          class="bg-light-blue h-12 rounded-md text-center text-2xl py-2 focus:outline-none focus:outline-teal focus:outline-offset-0"
           min="0"
           type="number"
           step="any"
         />
       </div>
-      <label class="block mt-8" for="people">Number of People</label>
       <Input
         v-model="form.people"
+        :is-invalid="form.people === 0"
         placeholder="0"
-        class="mt-2"
+        class="mt-8 lg:mt-10"
         min="0"
         type="number"
-        id="people"
+        label="Number of People"
       >
         <template #icon>
           <People />
@@ -115,7 +113,7 @@ const total = computed(() => {
       </Input>
     </div>
     <div
-      class="mt-8 bg-green rounded-2xl pt-9 px-6 pb-6 grid grid-rows-[auto_auto_1fr_auto]"
+      class="mt-8 lg:mt-0 bg-green rounded-2xl pt-9 px-6 pb-6 grid grid-rows-[auto_auto_1fr_auto] lg:h-[25rem]"
     >
       <div class="flex justify-between items-center">
         <div>
@@ -136,7 +134,7 @@ const total = computed(() => {
         </p>
       </div>
       <button
-        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 text-xl disabled:opacity-20 disabled:cursor-not-allowed row-start-4"
+        class="uppercase bg-teal text-green w-full rounded-md h-12 mt-8 lg:mt-0 text-xl disabled:opacity-20 disabled:cursor-not-allowed row-start-4 hover:bg-light-green focus:outline-none focus:outline-light-green focus:outline-offset-0"
         type="button"
         :disabled="formChanged"
         @click="reset"
