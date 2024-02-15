@@ -39,10 +39,10 @@ defineExpose({ focus: () => input.value.focus() })
 
 <template>
   <div :class="$attrs.class">
-    <div class="lg:flex items-center justify-between">
-      <label class="block" :for="id">{{ label }}</label>
+    <label class="lg:flex items-center justify-between" :for="id">
+      <p class="block">{{ label }}</p>
       <p v-if="isInvalid" class="text-red hidden lg:block">Can't be zero</p>
-    </div>
+    </label>
     <div class="relative flex items-center mt-2">
       <div class="absolute left-5 pointer-events-none">
         <slot name="icon" />
